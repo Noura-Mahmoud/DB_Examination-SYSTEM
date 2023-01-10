@@ -70,8 +70,7 @@ CREATE TABLE exam(
 CREATE TABLE question(
     q_id INT PRIMARY KEY IDENTITY,
 	q_text varchar(50) NOT NULL,
-	correct_ans_id char(1) NOT NULL,
-	ques_type varchar(20), /*0 for t&f, 1 for mcq*/
+	ques_type varchar(20), /*TF For true or false AND MCQ*/
 	difficulty_level INT,
     marks_worth INT,
 	Crs_Id INTEGER REFERENCES course(course_id)NOT NULL,
