@@ -107,8 +107,69 @@ BEGIN
 	INSERT INTO topic values(@crs_id,@topic_name)
 END
 GO
----------------------update-------------------------------
---1)update email and phone in student
+----------------------delete---------------------------
+--1) delete from student
+CREATE PROCEDURE delete_student
+(
+    @stud_id INT
+)
+AS
+BEGIN
+   
+
+    -- Delete any rows from the Std_Crs table that reference the student
+    DELETE FROM Std_Crs WHERE Std_Id = @stud_id;
+
+	-- Delete any rows from the std_ans table that reference the student
+    DELETE FROM std_ans WHERE stud_Id = @stud_id;
+
+    -- Delete the row from the student table
+    DELETE FROM student WHERE stud_id = @stud_id;
+END
+
+--2) delete instructor 
+CREATE PROCEDURE delete_instructor
+(
+	@ins_id INT
+)
+AS
+BEGIN
+	DELETE FROM Ins_Crs WHERE Ins_Id = @ins_id;
+	DELETE FROM instructor WHERE ins_id = @ins_id;
+END
+EXEC delete_instructor 3
+--3)delete department
+
+CREATE PROCEDURE delete_department
+(
+    @dept_id INT
+)
+AS
+BEGIN
+   
+
+    -- Delete any rows from the student table that reference the department
+    EXEC delete_student @dept_id;
+
+	-- Delete any rows from the instructor table that reference the department
+    EXEC delete_instructor @dept_id;
+	DELETE FROM department WHERE dept_id=@dept_id;
+
+  
+END
+--4) DELETE EXAM
+CREATE PROCEDURE delete_exam
+(
+	@exam_id INT
+)
+AS 
+BEGIN 
+	DELETE FROM std_ans WHERE ex_id = @exam_id;
+	DELETE FROM Exam_q WHERE ex_Id = @exam_id;
+	DELETE FROM exam WHERE exam_id = @exam_id;
+
+END
+
 
 
 
