@@ -49,6 +49,7 @@ CREATE TABLE Std_Crs (
 CREATE TABLE topic (
   topic_id INT PRIMARY KEY IDENTITY,  
   crs_id INT,
+  topic_name VARCHAR(50),
   FOREIGN KEY (crs_id) REFERENCES course(course_id)
 );
 
