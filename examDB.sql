@@ -78,7 +78,7 @@ CREATE TABLE question(
 
 
 CREATE TABLE choice(
-	choice_Id char(1), -- A, B, C OR d
+	choice_Id char(1), -- A, B, C OR D
 	choice_text varchar(200) NOT NULL,
 	correct_choice BIT,
 	question_Id INTEGER REFERENCES question(q_id) NOT NULL,
