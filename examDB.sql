@@ -33,9 +33,8 @@ CREATE TABLE instructor (
 CREATE TABLE course (
   course_id INT PRIMARY KEY IDENTITY,
   name VARCHAR(50),
-  description VARCHAR(50),
+  description VARCHAR(255),
 );
-
 
 CREATE TABLE Std_Crs (
     Std_Id INTEGER REFERENCES student(stud_id) NOT NULL,
@@ -52,7 +51,6 @@ CREATE TABLE topic (
   topic_name VARCHAR(50),
   FOREIGN KEY (crs_id) REFERENCES course(course_id)
 );
-
 
 CREATE TABLE Ins_Crs (
     Ins_Id INTEGER REFERENCES instructor(ins_id) NOT NULL,
@@ -104,12 +102,3 @@ CREATE TABLE std_ans(
 	ans_std char(1),
     PRIMARY KEY (stud_id,ex_id,question_id)
 );
-
-
-
-
-
-
-
-
-
