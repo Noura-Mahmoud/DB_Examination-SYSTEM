@@ -72,15 +72,15 @@ GO
 CREATE PROCEDURE insert_question
 (
 	@q_text varchar(50),
-	@correct_ans_id char(1),
 	@ques_type varchar(20),
 	@difficulty_level INT,
     @marks_worth INT,
 	@Crs_Id INTEGER
+	
 )
 AS
 BEGIN
-	INSERT INTO question values(@q_text,@correct_ans_id,@ques_type,@difficulty_level,@marks_worth,@Crs_Id)
+	INSERT INTO question values(@q_text,@ques_type,@difficulty_level,@marks_worth,@Crs_Id)
 END
 GO
 --7)insert topic
@@ -99,12 +99,16 @@ GO
 --8)insert topic
 CREATE PROCEDURE insert_topic
 (
-	@crs_id INT
+	@crs_id INT,
+	@topic_name VARCHAR(50)
 )
 AS
 BEGIN
-	INSERT INTO topic values(@crs_id)
+	INSERT INTO topic values(@crs_id,@topic_name)
 END
 GO
+---------------------update-------------------------------
+--1)update email and phone in student
+
 
 
