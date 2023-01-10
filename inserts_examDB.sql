@@ -55,32 +55,32 @@ INSERT INTO question VALUES ('Is the earth flat', 'TF', 1, 1, 3);
 
 --Choices
 INSERT INTO choice (choice_Id, choice_text, correct_choice, question_Id)
-VALUES ('A', 'A set of instructions to be followed', 1, 2),
-       ('B', 'A set of instructions to not be followed', 0, 2),
-	   ('C', 'A set of values to be put', 0, 2),
-	   ('D', 'A set of variables to be set', 0, 2),
-       ('A', 'y = ax^3 + bx^2 + cx + d', 1, 3),
-	   ('B', 'y = ax^3 + bx^3 + cx + d', 0, 3),
-	   ('C', 'y = ax^2 + bx^2 + cx + d', 0, 3),
-	   ('D', 'y = ax + bx^2 + d', 0, 3),
-       ('A', 'V = IR', 1, 4),
-	   ('B', 'E= IR', 0, 4),
-	   ('C', 'I= VR', 0, 4),
-	   ('D', 'R= VI', 0, 4),
-	   ('A', 'TRUE', 1, 5),
-	   ('B', 'FALSE', 0, 5);
+VALUES ('A', 'A set of instructions to be followed', 1, 1),
+       ('B', 'A set of instructions to not be followed', 0, 1),
+	   ('C', 'A set of values to be put', 0, 1),
+	   ('D', 'A set of variables to be set', 0, 1),
+       ('A', 'y = ax^3 + bx^2 + cx + d', 1, 2),
+	   ('B', 'y = ax^3 + bx^3 + cx + d', 0, 2),
+	   ('C', 'y = ax^2 + bx^2 + cx + d', 0, 2),
+	   ('D', 'y = ax + bx^2 + d', 0, 2),
+       ('A', 'V = IR', 1, 3),
+	   ('B', 'E= IR', 0, 3),
+	   ('C', 'I= VR', 0, 3),
+	   ('D', 'R= VI', 0, 3),
+	   ('A', 'TRUE', 1, 4),
+	   ('B', 'FALSE', 0, 4);
        
 
 --Exam_q
 INSERT INTO Exam_q (ex_Id, q_Id)
-VALUES (1, 2),
-       (1, 3),
-       (2, 4),
-       (3, 5);
+VALUES (1, 1),
+       (1, 2),
+       (2, 3),
+       (3, 4);
 
 --std_ans
 INSERT INTO std_ans (stud_Id, ex_id, question_id, ans_std)
-VALUES (1, 1, 2, 'A'),
-       (1, 1, 3, 'B'),
-       (2, 2, 4, 'C'),
-       (3, 3, 5, 'A');
+VALUES (1, 1, 1, 'A'),
+       (1, 1, 2, 'B'),
+       (2, 2, 3, 'C'),
+       (3, 3, 4, 'A');
