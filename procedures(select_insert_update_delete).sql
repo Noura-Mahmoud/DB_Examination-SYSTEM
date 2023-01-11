@@ -139,7 +139,16 @@ BEGIN
     DELETE FROM student WHERE stud_id = @stud_id;
 END
 
---2) delete instructor 
+--2) delete instructor
+CREATE PROCEDURE delete_instructor
+(
+	@ins_id INT
+)
+AS
+BEGIN
+	DELETE FROM Ins_Crs WHERE Ins_Id = @ins_id;
+	DELETE FROM instructor WHERE ins_id = @ins_id;
+END
 --EXEC delete_instructor 3
 --3)delete department
 
