@@ -1,5 +1,5 @@
 use examDB
-
+--------------------------------------------------------------------------------------------------------------------------------------------------
 create or alter proc generateExam
 	@crsID int,
 	--@exam_name nvarchar(50),
@@ -50,3 +50,34 @@ as
 		select @examID
 	close c1
 	deallocate c1
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+create or alter proc ExamCorrection
+	@stdID int,
+	@ExamID int 
+	WITH ENCRYPTION
+as
+	DECLARE @answers TABLE (questionID int, studentAns char(1), totalMark int)
+	INSERT INTO @answers select question_id, ans_std, marks_worth from std_ans 
+													inner join question	 q	
+													on  q.q_id = std_ans.question_id
+													where std_ans.ex_id = @ExamID AND stud_id = @stdID
+	-- gather every question in the exam with its choices  
+	DECLARE @choices TABLE (id char(1), correct bit, quesID int)
+	INSERT INTO @choices select choice_id, correct_choice, question_Id from choice c 
+																inner join  @answers ans	
+																on ans.questionID = c.question_id
+	DECLARE @totalGrade int
+	select @totalGrade = sum( totalMark )from @choices
+							inner join @answers
+							on questionID = quesID AND studentAns = id
+								where correct = 1 
+	DECLARE @crsID int
+		select @crsID = Crs_Id from exam where exam_id = @ExamID
+
+	UPDATE Std_Crs
+		SET grade = @totalGrade
+		WHERE Std_Id = @stdID AND Crs_Id = @crsID;
+
+
+exec ExamCorrection 1,1
