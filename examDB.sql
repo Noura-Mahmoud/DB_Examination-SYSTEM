@@ -33,9 +33,8 @@ CREATE TABLE instructor (
 CREATE TABLE course (
   course_id INT PRIMARY KEY IDENTITY,
   name VARCHAR(50),
-  description VARCHAR(50),
+  description VARCHAR(255),
 );
-
 
 CREATE TABLE Std_Crs (
     Std_Id INTEGER REFERENCES student(stud_id) NOT NULL,
@@ -49,9 +48,9 @@ CREATE TABLE Std_Crs (
 CREATE TABLE topic (
   topic_id INT PRIMARY KEY IDENTITY,  
   crs_id INT,
+  topic_name VARCHAR(50),
   FOREIGN KEY (crs_id) REFERENCES course(course_id)
 );
-
 
 CREATE TABLE Ins_Crs (
     Ins_Id INTEGER REFERENCES instructor(ins_id) NOT NULL,
@@ -71,8 +70,7 @@ CREATE TABLE exam(
 CREATE TABLE question(
     q_id INT PRIMARY KEY IDENTITY,
 	q_text varchar(50) NOT NULL,
-	correct_ans_id char(1) NOT NULL,
-	ques_type varchar(20), /*0 for t&f, 1 for mcq*/
+	ques_type varchar(20), /*TF For true or false AND MCQ*/
 	difficulty_level INT,
     marks_worth INT,
 	Crs_Id INTEGER REFERENCES course(course_id)NOT NULL,
@@ -80,7 +78,7 @@ CREATE TABLE question(
 
 
 CREATE TABLE choice(
-	choice_Id char(1), -- A, B, C OR d
+	choice_Id char(1), -- A, B, C OR D
 	choice_text varchar(200) NOT NULL,
 	correct_choice BIT,
 	question_Id INTEGER REFERENCES question(q_id) NOT NULL,
@@ -103,12 +101,3 @@ CREATE TABLE std_ans(
 	ans_std char(1),
     PRIMARY KEY (stud_id,ex_id,question_id)
 );
-
-
-
-
-
-
-
-
-
