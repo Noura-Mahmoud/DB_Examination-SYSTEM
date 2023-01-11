@@ -11,9 +11,13 @@ create or alter proc generateExam
 	WITH ENCRYPTION
 
 as
---1 @ExamDescription
-	--insert into exam(Crs_Id, exam_name, exam_duration) values(@crsID, @exam_name, @ExamDurationMinutes)
-	insert into exam(Crs_Id, exam_duration, Exam_description) values(@crsID, @ExamDurationMinutes, @ExamDescription)
+--1 
+	--insert into exam(Crs_Id, exam_duration, Exam_description) values(@crsID, @ExamDurationMinutes, @ExamDescription)
+	exec insert_exam
+    @ExamDescription,
+    @ExamDurationMinutes ,
+	@crsID 
+
 	--decalre temp table to questions and itereate on it by the cursor
 	DECLARE @quesTable TABLE (questionID int)
 --2
@@ -37,7 +41,10 @@ as
 	while @@FETCH_STATUS=0
 		begin
 		--3
-			insert into Exam_q(ex_Id, q_Id) values(@examID, @qID)
+			exec insert_exam_Q
+			@examID ,
+			@qID 
+			--insert into Exam_q(ex_Id, q_Id) values(@examID, @qID)
 			fetch c1 into @qID
 		end
 		select @examID
