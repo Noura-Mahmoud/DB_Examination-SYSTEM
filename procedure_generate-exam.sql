@@ -50,6 +50,3 @@ as
 		select @examID
 	close c1
 	deallocate c1
-
-
-exec generateExam
