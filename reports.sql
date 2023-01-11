@@ -3,7 +3,7 @@
 create proc Dept_students @deptID int 
 with encryption 
 as 
-select *
+select s.first_name + ' ' + s.last_name 'full name',s.email,s.phone_number 'phone number'
 from student s 
 where s.dept_id = @deptID
 
@@ -11,7 +11,7 @@ where s.dept_id = @deptID
 create proc student_grades @stdID int 
 with encryption 
 as 
-select s.first_name + s.last_name 'full name',c.name 'course',sc.grade 
+select s.first_name +' '+ s.last_name 'full name',c.name 'course',isnull(sc.grade,0) 
 from student s 
 join Std_Crs sc
 on s.stud_id=sc.Std_Id and s.stud_id=@stdID
@@ -23,10 +23,10 @@ on c.course_id=sc.Crs_Id
 create proc instructor_courses @insID int 
 with encryption 
 as 
-select i.first_name + i.last_name 'full name',c.name ,COUNT(*)
+select i.first_name +' ' + i.last_name 'full name',c.name 'course' ,COUNT(*) 'number of students'
 from instructor i 
 join Ins_Crs ic
-on i.ins_id = ic.Ins_Id 
+on i.ins_id = ic.Ins_Id and i.ins_id=@insID
 join course c 
 on ic.Crs_Id = c.course_id
 join Std_Crs sc 
@@ -38,8 +38,7 @@ group by c.name,i.first_name,i.last_name
 create proc course_topics @crsID int 
 with encryption 
 as 
-select *
+select c.name , t.topic_name 
 from course c
 join topic t 
 on c.course_id = t.crs_id and c.course_id=@crsID
-
