@@ -23,7 +23,7 @@ CREATE TABLE instructor (
     ins_id INT PRIMARY KEY IDENTITY,
     dept_id INT NOT NULL,
     first_name VARCHAR(50) NOT NULL,
-	last_name VARCHAR(50),
+	last_name VARCHAR(50) NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	phone_number VARCHAR(50) NOT NULL,
   FOREIGN KEY (dept_id) REFERENCES department(dept_id)

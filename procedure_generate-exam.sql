@@ -83,3 +83,14 @@ as
 		SET grade = @totalGrade
 		WHERE Std_Id = @stdID AND Crs_Id = @crsID;*/
 ---------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR ALTER PROC getModelAnswers @examID int
+AS
+	select q_text as Question, choice_Id as [Choice no], choice_text as Answer from question
+				inner join Exam_q	
+				on question.q_id = Exam_q.q_Id
+				inner join choice
+				on question_Id = question.q_id
+				where  Exam_q.ex_Id = @examID
+				AND correct_choice = 1
+------------------------------------------------------------------------------------------------------------------------------------------------
+
