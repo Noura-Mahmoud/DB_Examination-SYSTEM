@@ -1,6 +1,6 @@
 --•	Report that returns the students information according to Department No parameter.
 
-create Dept_students @deptID int 
+create proc Dept_students @deptID int 
 with encryption 
 as 
 select *
@@ -8,7 +8,7 @@ from student s
 where s.dept_id = @deptID
 
 --•	Report that takes the student ID and returns the grades of the student in all courses. %
-create student_grades @stdID int 
+create proc student_grades @stdID int 
 with encryption 
 as 
 select s.first_name + s.last_name 'full name',c.name 'course',sc.grade 
