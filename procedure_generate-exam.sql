@@ -47,7 +47,14 @@ as
 	close c1
 	deallocate c1
 -------------------------------------------------------------------------------------------------------------------------------------------------
-
+CREATE OR ALTER PROC updateGrade 
+		@stdID int, @crsID int, @grade int
+		WITH ENCRYPTION
+		AS
+		UPDATE Std_Crs
+		SET grade = @grade
+		WHERE Std_Id = @stdID AND Crs_Id = @crsID;
+------------------------------------------------------------------------------------------------------------------------------------------
 create or alter proc ExamCorrection
 	@stdID int,
 	@ExamID int 
@@ -64,13 +71,15 @@ as
 																inner join  @answers ans	
 																on ans.questionID = c.question_id
 	DECLARE @totalGrade int
-	select @totalGrade = sum( totalMark )from @choices
+	select @totalGrade = isnull(sum(totalMark), 0)from @choices
 							inner join @answers
 							on questionID = quesID AND studentAns = id
 								where correct = 1 
 	DECLARE @crsID int
 		select @crsID = Crs_Id from exam where exam_id = @ExamID
 
-	UPDATE Std_Crs
+	exec updateGrade @stdID, @crsID, @totalGrade
+	/*UPDATE Std_Crs
 		SET grade = @totalGrade
-		WHERE Std_Id = @stdID AND Crs_Id = @crsID;
+		WHERE Std_Id = @stdID AND Crs_Id = @crsID;*/
+---------------------------------------------------------------------------------------------------------------------------------------
