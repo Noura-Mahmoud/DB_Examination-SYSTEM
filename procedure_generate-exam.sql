@@ -9,7 +9,6 @@ create or alter proc generateExam
 	@numOfTFQues int,
 	@numOfMcqQues int 
 	WITH ENCRYPTION
-
 as
 --1 
 	--insert into exam(Crs_Id, exam_duration, Exam_description) values(@crsID, @ExamDurationMinutes, @ExamDescription)
@@ -31,9 +30,6 @@ as
 
 	declare @examID nvarchar(200)
 	select @examID = (select TOP 1 exam_id FROM exam order by exam_id desc)
-	--select TOP 1 exam_id FROM exam order by exam_id desc
-
-	--set @id = @examID
 
 	declare @qID int
 	open c1
@@ -78,6 +74,3 @@ as
 	UPDATE Std_Crs
 		SET grade = @totalGrade
 		WHERE Std_Id = @stdID AND Crs_Id = @crsID;
-
-
-exec ExamCorrection 1,1
