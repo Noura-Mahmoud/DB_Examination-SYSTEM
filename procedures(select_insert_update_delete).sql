@@ -107,6 +107,18 @@ BEGIN
 	INSERT INTO topic values(@crs_id,@topic_name)
 END
 GO
+--9) insert into exam_q
+CREATE PROCEDURE insert_exam_Q
+
+(
+	@ex_id INT,
+	@q_id INT
+)
+AS
+BEGIN
+	INSERT INTO Exam_q values(@ex_id,@q_id)
+END
+GO
 ----------------------delete---------------------------
 --1) delete from student
 CREATE PROCEDURE delete_student
