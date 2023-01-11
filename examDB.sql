@@ -11,28 +11,28 @@ CREATE TABLE department (
 
 CREATE TABLE student (
   stud_id INT PRIMARY KEY IDENTITY,
-  dept_id INT,
-  first_name VARCHAR(50),
-  last_name VARCHAR(50),
-  email VARCHAR(50),
-  phone_number VARCHAR(50),
+  dept_id INT NOT NULL,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  phone_number VARCHAR(50) NOT NULL,
   FOREIGN KEY (dept_id) REFERENCES department(dept_id)
 );
 
 CREATE TABLE instructor (
     ins_id INT PRIMARY KEY IDENTITY,
     dept_id INT NOT NULL,
-    first_name VARCHAR(50),
+    first_name VARCHAR(50) NOT NULL,
 	last_name VARCHAR(50),
-	email VARCHAR(50),
-	phone_number VARCHAR(50),
+	email VARCHAR(50) NOT NULL,
+	phone_number VARCHAR(50) NOT NULL,
   FOREIGN KEY (dept_id) REFERENCES department(dept_id)
 );
 
 
 CREATE TABLE course (
   course_id INT PRIMARY KEY IDENTITY,
-  name VARCHAR(50),
+  name VARCHAR(50) NOT NULL,
   description VARCHAR(255),
 );
 
@@ -47,8 +47,8 @@ CREATE TABLE Std_Crs (
 
 CREATE TABLE topic (
   topic_id INT PRIMARY KEY IDENTITY,  
-  crs_id INT,
-  topic_name VARCHAR(50),
+  crs_id INT NOT NULL,
+  topic_name VARCHAR(50) NOT NULL,
   FOREIGN KEY (crs_id) REFERENCES course(course_id)
 );
 
@@ -70,9 +70,9 @@ CREATE TABLE exam(
 CREATE TABLE question(
     q_id INT PRIMARY KEY IDENTITY,
 	q_text varchar(50) NOT NULL,
-	ques_type varchar(20), /*TF For true or false AND MCQ*/
+	ques_type varchar(20) NOT NULL, 
 	difficulty_level INT,
-    marks_worth INT,
+    marks_worth INT DEFAULT 1,
 	Crs_Id INTEGER REFERENCES course(course_id)NOT NULL,
 );
 
@@ -80,7 +80,7 @@ CREATE TABLE question(
 CREATE TABLE choice(
 	choice_Id char(1), -- A, B, C OR D
 	choice_text varchar(200) NOT NULL,
-	correct_choice BIT,
+	correct_choice BIT NOT NULL,
 	question_Id INTEGER REFERENCES question(q_id) NOT NULL,
 	PRIMARY KEY (choice_Id, question_Id)
 );
