@@ -74,14 +74,20 @@ as
 	select @totalGrade = isnull(sum(totalMark), 0)from @choices
 							inner join @answers
 							on questionID = quesID AND studentAns = id
+	DECLARE @Grade int
+	select @Grade = isnull((sum(totalMark)*100)/@totalGrade, 0) from @choices
+							inner join @answers
+							on questionID = quesID AND studentAns = id
 								where correct = 1 
 	DECLARE @crsID int
 		select @crsID = Crs_Id from exam where exam_id = @ExamID
 
-	exec updateGrade @stdID, @crsID, @totalGrade
+	exec updateGrade @stdID, @crsID, @Grade
 	/*UPDATE Std_Crs
 		SET grade = @totalGrade
 		WHERE Std_Id = @stdID AND Crs_Id = @crsID;*/
+
+		exec ExamCorrection 2,2
 ---------------------------------------------------------------------------------------------------------------------------------------
 CREATE OR ALTER PROC getModelAnswers @examID int
 AS
