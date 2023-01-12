@@ -11,7 +11,7 @@ where s.dept_id = @deptID
 create proc student_grades @stdID int 
 with encryption 
 as 
-select s.first_name +' '+ s.last_name 'full name',c.name 'course',isnull(sc.grade,0) 'grade'
+select s.first_name +' '+ s.last_name 'full name',c.name 'course',isnull(sc.[grade %],0) 'grade'
 from student s 
 join Std_Crs sc
 on s.stud_id=sc.Std_Id and s.stud_id=@stdID

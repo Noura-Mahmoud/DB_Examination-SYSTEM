@@ -22,7 +22,7 @@ VALUES ('Introduction to Computer Science', 'An introduction to the basic concep
        ('Electricity and Magnetism', 'An introduction to the basic principles of electricity and magnetism');
 
 --std_crs
-INSERT INTO Std_Crs (Std_Id, Crs_Id, enrollment_date, grade)
+INSERT INTO Std_Crs (Std_Id, Crs_Id, enrollment_date, [grade %])
 VALUES (1, 1, '2020-01-01', 85),
        (2, 2, '2020-01-02', 90),
        (3, 3, '2020-01-03', 80);

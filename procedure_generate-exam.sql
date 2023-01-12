@@ -52,7 +52,7 @@ CREATE OR ALTER PROC updateGrade
 		WITH ENCRYPTION
 		AS
 		UPDATE Std_Crs
-		SET grade = @grade
+		SET [grade %] = @grade
 		WHERE Std_Id = @stdID AND Crs_Id = @crsID;
 ------------------------------------------------------------------------------------------------------------------------------------------
 create or alter proc ExamCorrection
@@ -87,7 +87,7 @@ as
 		SET grade = @totalGrade
 		WHERE Std_Id = @stdID AND Crs_Id = @crsID;*/
 
-		exec ExamCorrection 2,2
+		exec ExamCorrection 3,3
 ---------------------------------------------------------------------------------------------------------------------------------------
 CREATE OR ALTER PROC getModelAnswers @examID int
 AS

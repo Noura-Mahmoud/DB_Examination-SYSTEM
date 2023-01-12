@@ -40,7 +40,7 @@ CREATE TABLE Std_Crs (
     Std_Id INTEGER REFERENCES student(stud_id) NOT NULL,
     Crs_Id INTEGER REFERENCES course(course_id) NOT NULL,
 	enrollment_date DATE,
-	grade INT,
+	[grade %] INT,
     PRIMARY KEY (Std_Id, Crs_Id)
 );
 
